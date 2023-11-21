@@ -3,12 +3,17 @@ import "./Header.css";
 import backgroundImage from "../../assets/background.jpg"
 import CartButton from './CartButton';
 
-const Header = () => {
+const Header = (props) => {
+  const oncCartOpenHandler = () => {
+    props.setCartOpen(true);
+    console.log("CLICKING");
+  }
+
   return (
     <>
     <header className="header">
       <h1>ReactMeals</h1>
-      <CartButton/>
+      <CartButton onClick={oncCartOpenHandler}/>
     </header>
     <div className="main-image">
       <img src={backgroundImage} alt='background' />

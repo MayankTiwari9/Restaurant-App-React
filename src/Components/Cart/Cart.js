@@ -2,8 +2,11 @@ import React from "react";
 import Modal from "../UI/Modal";
 import "./Cart.css";
 
-const Cart = () => {
+const Cart = (props) => {
   const cartItems = [{ id: "1", name: "Sushi", totalAmount: 35.62 }];
+  const onCartHandler = () => {
+    props.setCartOpen(false);
+  };
 
   return (
     <Modal>
@@ -16,8 +19,10 @@ const Cart = () => {
               <h3>{item.totalAmount}</h3>
             </div>
             <div className="actions">
-              <button className="button--alt">Close</button>
-              <button className=".button">Order</button>
+              <button onClick={onCartHandler} className="button--alt">
+                Close
+              </button>
+              <button className="button">Order</button>
             </div>
           </div>
         );
