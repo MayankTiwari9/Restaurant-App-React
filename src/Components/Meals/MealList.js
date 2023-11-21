@@ -30,13 +30,22 @@ const MealList = () => {
   ];
 
   return (
-    <ul  className="mealList-main">
+    <ul className="mealList-main">
       {mealItem.map((item) => {
         return (
-          <li key={item.id}  className="mealList">
-            <h3>{item.name}</h3>
-            <div className="mealList-description">{item.descriptiom}</div>
-            <div className="mealList-price">${item.price.toFixed(2)}</div>
+          <li key={item.id} className="mealList">
+            <div>
+              <h3>{item.name}</h3>
+              <div className="mealList-description">{item.descriptiom}</div>
+              <div className="mealList-price">${item.price.toFixed(2)}</div>
+            </div>
+            <form className="mealList-form">
+              <div>
+                <h4>Amount</h4>
+                <input type="number" value={1} />
+              </div>
+              <button>+Add</button>
+            </form>
           </li>
         );
       })}
