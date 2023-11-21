@@ -1,12 +1,14 @@
 import Header from "./Components/Layout/Header";
+import MealList from "./Components/Meals/MealList";
 import Summary from "./Components/UI/Summary";
 
 function App() {
   return (
-    <div>
+    <>
       <Header/>
       <Summary/>
-    </div>
+      <MealList/>
+    </>
   );
 }
 
