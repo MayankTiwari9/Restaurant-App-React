@@ -44,6 +44,7 @@
 .mealList-form > div > input{
     width: 40px;
     height: 1.7vmax;
+    outline: none;
 }
 
 .mealList-form > button{
@@ -55,4 +56,24 @@
     border: none;
     border-radius: 25px;
     font-weight: 600;
+}
+
+@media screen and (max-width: 750px) {
+.mealList-form > div{
+  display: flex;
+  flex-direction: column;
+}
+
+  .mealList-form > div > input{
+    width: 40px;
+    height: 3vmax;
+}
+.mealList-form > button{
+  width: 55px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 5vmax;
+    margin-top: 10px;
+}
 }

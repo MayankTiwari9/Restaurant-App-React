@@ -1,33 +1,50 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./MealList.css";
+import CartContext from "../../store/cart-context";
 
 const MealList = () => {
+  const cartCtx = useContext(CartContext);
+  const [amount, setAmount] = useState(1);
+
   const mealItem = [
     {
       id: 1,
       name: "Sushi",
-      descriptiom: "Finest fish and veggies",
+      description: "Finest fish and veggies",
       price: 22.99,
     },
     {
       id: 2,
       name: "Schnitzel",
-      descriptiom: "A german speciality!",
+      description: "A german speciality!",
       price: 16.5,
     },
     {
       id: 3,
       name: "Barbecue Burger",
-      descriptiom: "America, raw, meaty",
+      description: "America, raw, meaty",
       price: 12.99,
     },
     {
       id: 4,
       name: "Green Bowl",
-      descriptiom: "Healthy...and green...",
+      description: "Healthy...and green...",
       price: 16.0,
     },
   ];
+
+  const addCartItemHandler = (item) => {
+    cartCtx.addItem({
+      id: item.id,
+      name: item.name,
+      amount: +amount, 
+      price: item.price,
+    })
+  }
+
+  const amountChangeHandler = (event) => {
+    setAmount(event.target.value);
+  };
 
   return (
     <ul className="mealList-main">
@@ -36,15 +53,15 @@ const MealList = () => {
           <li key={item.id} className="mealList">
             <div>
               <h3>{item.name}</h3>
-              <div className="mealList-description">{item.descriptiom}</div>
+              <div className="mealList-description">{item.description}</div>
               <div className="mealList-price">${item.price.toFixed(2)}</div>
             </div>
-            <form className="mealList-form">
+            <form className="mealList-form" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <h4>Amount</h4>
-                <input type="number" value={1} />
+                <input type="number" id="amount" value={amount} onChange={amountChangeHandler}/>
               </div>
-              <button>+Add</button>
+              <button onClick={() => addCartItemHandler(item)}>+Add</button>
             </form>
           </li>
         );
