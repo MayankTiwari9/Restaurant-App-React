@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "../UI/Modal";
 import "./Cart.css";
+import CartItemCard from "./CartItemCard";
+import CartContext from '../../store/cart-context'
 
 const Cart = (props) => {
-  const cartItems = [{ id: "1", name: "Sushi", totalAmount: 35.62 }];
+  const cartCtx = useContext(CartContext);
+
   const onCartHandler = () => {
     props.setCartOpen(false);
   };
 
+  let totalAmount = cartCtx.totalAmount.toFixed(2);
+
   return (
     <Modal>
-      {cartItems.map((item) => {
-        return (
-          <div key={item.id} className="cart-items">
-            <h3>{item.name}</h3>
+          <div className="cart-items">
+            <CartItemCard item={cartCtx.items}/>
             <div className="total">
               <h3>Total Amount</h3>
-              <h3>{item.totalAmount}</h3>
+              <h3>${totalAmount}</h3>
             </div>
             <div className="actions">
               <button onClick={onCartHandler} className="button--alt">
@@ -25,8 +28,6 @@ const Cart = (props) => {
               <button className="button">Order</button>
             </div>
           </div>
-        );
-      })}
     </Modal>
   );
 };
