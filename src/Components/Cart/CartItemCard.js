@@ -3,12 +3,11 @@ import "./CartItemCard.css";
 import CartContext from "../../store/cart-context";
 
 const CartItemCard = (props) => {
-    const cartCtx = useContext(CartContext);
+  const cartCtx = useContext(CartContext);
 
-    const decreaseQuantityHandler  = (itemId) => {
-        cartCtx.removeItem(itemId);
-    }
-  
+  const decreaseQuantityHandler = (itemId) => {
+    cartCtx.removeItem(itemId);
+  };
 
   return (
     <div>
@@ -23,7 +22,12 @@ const CartItemCard = (props) => {
               </div>
             </div>
             <div className="cartItem-main--actions">
-              <button className="cartItem-action-dec" onClick={() => decreaseQuantityHandler(item.id)}>-</button>
+              <button
+                className="cartItem-action-dec"
+                onClick={() => decreaseQuantityHandler(item.id)}
+              >
+                -
+              </button>
               <button className="cartItem-action-inc">+</button>
             </div>
           </div>

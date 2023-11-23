@@ -10,8 +10,8 @@ function App() {
 
   return (
     <CartProvider>
-      {cartOpen && <Cart setCartOpen={setCartOpen}/>}
-      <Header setCartOpen={setCartOpen}/>
+      {cartOpen && <Cart setCartOpen={setCartOpen} />}
+      <Header setCartOpen={setCartOpen} />
       <Summary />
       <MealList />
     </CartProvider>

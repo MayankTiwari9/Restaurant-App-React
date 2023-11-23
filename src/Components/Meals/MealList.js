@@ -4,7 +4,7 @@ import CartContext from "../../store/cart-context";
 
 const MealList = () => {
   const cartCtx = useContext(CartContext);
-  const [amount, setAmount] = useState(1);
+  const [amounts, setAmounts] = useState({});
 
   const mealItem = [
     {
@@ -16,7 +16,7 @@ const MealList = () => {
     {
       id: 2,
       name: "Schnitzel",
-      description: "A german speciality!",
+      description: "A German specialty!",
       price: 16.5,
     },
     {
@@ -37,13 +37,16 @@ const MealList = () => {
     cartCtx.addItem({
       id: item.id,
       name: item.name,
-      amount: +amount, 
+      amount: +amounts[item.id] || 1,
       price: item.price,
-    })
-  }
+    });
+  };
 
-  const amountChangeHandler = (event) => {
-    setAmount(event.target.value);
+  const amountChangeHandler = (itemId, newAmount) => {
+    setAmounts((prevAmounts) => ({
+      ...prevAmounts,
+      [itemId]: newAmount,
+    }));
   };
 
   return (
@@ -56,17 +59,24 @@ const MealList = () => {
               <div className="mealList-description">{item.description}</div>
               <div className="mealList-price">${item.price.toFixed(2)}</div>
             </div>
-            <form className="mealList-form" onSubmit={(e) => e.preventDefault()}>
+            <form
+              className="mealList-form"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <div>
                 <h4>Amount</h4>
-                <input type="number" id="amount" value={amount} onChange={amountChangeHandler}/>
+                <input
+                  type="number"
+                  id={`amount-${item.id}`}
+                  defaultValue={amounts[item.id] || 1}
+                  onChange={(e) => amountChangeHandler(item.id, e.target.value)}
+                />
               </div>
               <button onClick={() => addCartItemHandler(item)}>+Add</button>
             </form>
           </li>
         );
       })}
-      <div></div>
     </ul>
   );
 };

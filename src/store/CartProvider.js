@@ -40,16 +40,15 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.id
     );
-  
+
     const existingCartItem = state.items[existingCartItemIndex];
-  
-    // If the item doesn't exist, do nothing
+
     if (!existingCartItem) {
       return state;
     }
-  
+
     let updatedItems;
-  
+
     if (existingCartItem.amount === 1) {
       updatedItems = state.items.filter((item) => item.id !== action.id);
     } else {
@@ -57,18 +56,16 @@ const cartReducer = (state, action) => {
         ...existingCartItem,
         amount: existingCartItem.amount - 1,
       };
-  
+
       updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
     }
-  
+
     return {
       items: updatedItems,
       totalAmount: state.totalAmount - existingCartItem.price,
     };
   }
-  
-  
 
   return defaultCartState;
 };
